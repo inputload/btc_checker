@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import requests
+import time
 
 
 def create():
@@ -10,11 +11,12 @@ def create():
     for i in file:
         index += 1
         subprocess.Popen([sys.executable, 'check.py', i])
-        if index // 1000 == 0:
+        if index > 1000 and index // 1000 == 0:
             response = requests.post(
                 url='https://api.telegram.org/bot1420550733:AAGv9VhgYDyA1cJr76Mt-ToEdnk6s59poFg/sendMessage',
                 data={'chat_id': 1293582406, 'text': '1000 прошло'}
             ).json()
+        time.sleep(0.1)
     response = requests.post(
         url='https://api.telegram.org/bot1420550733:AAGv9VhgYDyA1cJr76Mt-ToEdnk6s59poFg/sendMessage',
         data={'chat_id': 1293582406, 'text': 'Словарь кончился'}
